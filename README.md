@@ -1,8 +1,8 @@
-# RPGSystem
+# Legacy Project
 
 ![](fortnite-building.gif)
 
-As of right now this project is not yet have RPG elements. But I will create more content in September 2018. Project has 2 modules:
+Project has 2 modules:
   * Radar Module
   * Fortnite Building System
 
@@ -27,14 +27,6 @@ Project Demo: https://drive.google.com/open?id=1WPMl2u9XeY4yFsZ06JxBG1i9X2WuL3cA
   * Resources and It's Manager
   * Grid System
     * Resizeable Grid
-
-## Future Plan
-  
-  * Fallout Style Character Attributes
-  * Complex Inventory System
-  * Complex Quest System
-  * Complex Dialogue System
-  * Complex Craft System
 
 ## Release History
 
