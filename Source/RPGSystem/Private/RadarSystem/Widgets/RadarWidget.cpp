@@ -30,12 +30,12 @@ void URadarWidget::AddDirectionWidget(FDirectionInfo Info)
 	{
 		W_Direction->SetDirectionInfo(Info);
 		FString NameStr = W_Direction->GetDirectionInfo().GetName().ToString();
-		int32 rot = W_Direction->GetDirectionInfo().GetWorldRot();
+		int32 Rot = W_Direction->GetDirectionInfo().GetWorldRot();
 
 		DirectionWidgets.Add(W_Direction);
-		UOverlaySlot* Slot = RadarOverlay->AddChildToOverlay(W_Direction);
-		Slot->SetHorizontalAlignment(HAlign_Center);
-		Slot->SetVerticalAlignment(VAlign_Bottom);
+		UOverlaySlot* OverlaySlot = RadarOverlay->AddChildToOverlay(W_Direction);
+		OverlaySlot->SetHorizontalAlignment(HAlign_Center);
+		OverlaySlot->SetVerticalAlignment(VAlign_Bottom);
 	}
 }
 
@@ -45,9 +45,9 @@ void URadarWidget::AddEnemyWidget()
 	if (W_Enemy != nullptr)
 	{
 		EnemyWidgets.Add(W_Enemy);
-		UOverlaySlot* Slot = RadarOverlay->AddChildToOverlay(W_Enemy);
-		Slot->SetHorizontalAlignment(HAlign_Center);
-		Slot->SetVerticalAlignment(VAlign_Center);
+		UOverlaySlot* OverlaySlot = RadarOverlay->AddChildToOverlay(W_Enemy);
+		OverlaySlot->SetHorizontalAlignment(HAlign_Center);
+		OverlaySlot->SetVerticalAlignment(VAlign_Center);
 		W_Enemy->SetPadding(FMargin(0.f, 0.f, 0.f, 7.f));
 	}
 }
@@ -59,9 +59,9 @@ void URadarWidget::AddQuestWidget(EMarkerTypes Type)
 	{
 		W_Quest->SetType(Type);
 		QuestWidgets.Add(W_Quest);
-		UOverlaySlot* Slot = RadarOverlay->AddChildToOverlay(W_Quest);
-		Slot->SetHorizontalAlignment(HAlign_Center);
-		Slot->SetVerticalAlignment(VAlign_Center);
+		UOverlaySlot* OverlaySlot = RadarOverlay->AddChildToOverlay(W_Quest);
+		OverlaySlot->SetHorizontalAlignment(HAlign_Center);
+		OverlaySlot->SetVerticalAlignment(VAlign_Center);
 		W_Quest->SetPadding(FMargin(0.f, 5.f, 0.f, 0.f));
 	}
 }
@@ -73,9 +73,9 @@ void URadarWidget::AddLandmarkWidget(UTexture2D* IconTexture)
 	{
 		W_Landmark->SetLandmarkIcon(IconTexture);
 		LandmarkWidgets.Add(W_Landmark);
-		UOverlaySlot* Slot = RadarOverlay->AddChildToOverlay(W_Landmark);
-		Slot->SetHorizontalAlignment(HAlign_Center);
-		Slot->SetVerticalAlignment(VAlign_Center);
+		UOverlaySlot* OverlaySlot = RadarOverlay->AddChildToOverlay(W_Landmark);
+		OverlaySlot->SetHorizontalAlignment(HAlign_Center);
+		OverlaySlot->SetVerticalAlignment(VAlign_Center);
 	}
 }
 

@@ -2,8 +2,6 @@
 
 #include "QuestWidget.h"
 
-#define INVTEXT(x) FText::FromString(TEXT(x))
-
 UQuestWidget::UQuestWidget(const FObjectInitializer & ObjectInitializer) : Super(ObjectInitializer)
 {
 	static ConstructorHelpers::FObjectFinder<UTexture2D>
@@ -45,7 +43,7 @@ void UQuestWidget::SetArrowDirection(bool bUp)
 void UQuestWidget::UpdateDistance(int32 Distance)
 {
 	if (Distance > MaxDisplayedDistance)
-		DistanceText->SetText(FText::Format(INVTEXT("{0}+"), FText::AsNumber(MaxDisplayedDistance)));
+		DistanceText->SetText(FText::Format(FText::FromString(TEXT("{0}+")), FText::AsNumber(MaxDisplayedDistance)));
 	else
-		DistanceText->SetText(FText::Format(INVTEXT("{0}m"), FText::AsNumber(FMath::Clamp<int32>(Distance, 0, MaxDisplayedDistance))));
+		DistanceText->SetText(FText::Format(FText::FromString(TEXT("{0}m")), FText::AsNumber(FMath::Clamp<int32>(Distance, 0, MaxDisplayedDistance))));
 }

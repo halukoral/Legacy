@@ -2,13 +2,10 @@
 
 #include "EnemyWidget.h"
 
-
-#define INVTEXT(x) FText::FromString(TEXT(x))
-
 void UEnemyWidget::UpdateDistance(int32 Distance)
 {
 	if (Distance > MaxDisplayedDistance)
-		DistanceText->SetText(FText::Format(INVTEXT("{0}+"), FText::AsNumber(MaxDisplayedDistance)));
+		DistanceText->SetText(FText::Format(FText::FromString(TEXT("{0}+")), FText::AsNumber(MaxDisplayedDistance)));
 	else
-		DistanceText->SetText(FText::Format(INVTEXT("{0}m"), FText::AsNumber(Distance)));
+		DistanceText->SetText(FText::Format(FText::FromString(TEXT("{0}m")), FText::AsNumber(Distance)));
 }

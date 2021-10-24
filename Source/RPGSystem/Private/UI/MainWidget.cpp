@@ -31,11 +31,11 @@ TArray<UResourceWidget*> UMainWidget::GenerateResourceWidget(UResourceManager* R
 		{
 			W_Resource->SetResource(Key);
 			ResourceWidgets.Add(W_Resource);
-			auto Slot = ResourceBox->AddChildToHorizontalBox(W_Resource);
+			auto OverlaySlot = ResourceBox->AddChildToHorizontalBox(W_Resource);
 			if (i > 0)
-				Slot->SetPadding(FMargin(10.f, 0.f, 0.f, 0.f));
+				OverlaySlot->SetPadding(FMargin(10.f, 0.f, 0.f, 0.f));
 			else
-				Slot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
+				OverlaySlot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
 		}
 		++i;
 	}
@@ -53,11 +53,11 @@ TArray<UBuildingWidget*> UMainWidget::GenerateBuildingWidgets(UBuildingManager* 
 		{
 			W_Building->SetBuilding(Building);
 			BuildingWidgets.Add(W_Building);
-			auto Slot = BuildingBox->AddChildToHorizontalBox(W_Building);
+			auto OverlaySlot = BuildingBox->AddChildToHorizontalBox(W_Building);
 			if (i > 0)
-				Slot->SetPadding(FMargin(10.f, 0.f, 0.f, 0.f));
+				OverlaySlot->SetPadding(FMargin(10.f, 0.f, 0.f, 0.f));
 			else
-				Slot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
+				OverlaySlot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
 		}
 		++i;
 	}

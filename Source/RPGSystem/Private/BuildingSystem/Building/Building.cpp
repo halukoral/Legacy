@@ -43,11 +43,11 @@ void ABuilding::BeginPlay()
 	BuildWidget = Cast<UBuildWidget>(BuildWidgetComponent->GetUserWidgetObject());
 	HealthBarWidget = Cast<UBuildingHealthBar>(HealthBarWidgetComponent->GetUserWidgetObject());
 
-	if (UUtils::Test(8, Resource, BuildWidgetComponent, BuildWidget, HealthBarWidgetComponent, HealthBarWidget, BuildingMesh, (__FUNCTION__), __LINE__) == false) return;
+	if (UUtils::Test(8, ResourceClass, BuildWidgetComponent, BuildWidget, HealthBarWidgetComponent, HealthBarWidget, BuildingMesh, (__FUNCTION__), __LINE__) == false) return;
 
 
-	FBuildingResourceVersion* VersionInfo = ResourceVersions.Find(Resource);
-	BuildWidget->Update(Resource, *VersionInfo);
+	FBuildingResourceVersion* VersionInfo = ResourceVersions.Find(ResourceClass);
+	BuildWidget->Update(ResourceClass, *VersionInfo);
 
 	BuildingStat->InitManager(this);
 	BuildWidgetComponent->SetVisibility(true, false);
@@ -57,8 +57,8 @@ void ABuilding::BeginPlay()
 
 void ABuilding::UpdateGhostMaterial()
 {
-	if (UUtils::Test(3, Resource, (__FUNCTION__), __LINE__) == false) return;
-	DynamicMaterialInstance->SetVectorParameterValue(FName(TEXT("Color")), Resource->GetDefaultObject<AResource>()->GetResourceData().GetColor());
+	if (UUtils::Test(3, ResourceClass, (__FUNCTION__), __LINE__) == false) return;
+	DynamicMaterialInstance->SetVectorParameterValue(FName(TEXT("Color")), ResourceClass->GetDefaultObject<AResource>()->GetResourceData().GetColor());
 }
 
 void ABuilding::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -123,11 +123,11 @@ void ABuilding::UpdateResource(TSubclassOf<AResource> NewResource)
 {
 	if (UUtils::Test(3, BuildWidget, (__FUNCTION__), __LINE__) == false) return;
 
-	if (UKismetSystemLibrary::IsValidClass(NewResource) && NewResource != Resource)
+	if (UKismetSystemLibrary::IsValidClass(NewResource) && NewResource != ResourceClass)
 	{
-		Resource = NewResource;
+		ResourceClass = NewResource;
 		UpdateGhostMaterial();
-		BuildWidget->Update(Resource, *ResourceVersions.Find(Resource));
+		BuildWidget->Update(ResourceClass, *ResourceVersions.Find(ResourceClass));
 	}
 }
 
@@ -160,20 +160,20 @@ void ABuilding::OnLeavePlayerSight()
 		HealthBarWidgetComponent->SetVisibility(false, false);
 }
 
-void ABuilding::OnBuild(TSubclassOf<AResource> Resource)
+void ABuilding::OnBuild(TSubclassOf<AResource> InResource)
 {
-	if (UUtils::Test(8, BuildingMesh, BuildWidgetComponent, BuildingStat, HealthBarWidget, HealthBarWidgetComponent, Resource, (__FUNCTION__), __LINE__) == false) return;
+	if (UUtils::Test(8, BuildingMesh, BuildWidgetComponent, BuildingStat, HealthBarWidget, HealthBarWidgetComponent, InResource, (__FUNCTION__), __LINE__) == false) return;
 
 	bBuilt = true;
 	BuildingMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
-	BuildingMesh->SetMaterial(0, Resource->GetDefaultObject<AResource>()->GetResourceData().GetMeshMaterial());
+	BuildingMesh->SetMaterial(0, InResource->GetDefaultObject<AResource>()->GetResourceData().GetMeshMaterial());
 	DynamicMaterialInstance = BuildingMesh->CreateDynamicMaterialInstance(0, BuildingMesh->GetMaterial(0));
 
 	BuildWidgetComponent->DestroyComponent();
 
-	BuildingStat->SetMax(EStats::VE_Health, ResourceVersions.Find(Resource)->GetMaxHealth(), false);
+	BuildingStat->SetMax(EStats::VE_Health, ResourceVersions.Find(InResource)->GetMaxHealth(), false);
 	BuildingStat->SetStat(EStats::VE_Health, 0, false);
-	BuildingTime = ResourceVersions.Find(Resource)->GetBuildingTime();
+	BuildingTime = ResourceVersions.Find(InResource)->GetBuildingTime();
 	
 	HealthBarWidget->InitBar(BuildingStat->GetStat(EStats::VE_Health).GetMax());
 	HealthBarWidgetComponent->SetVisibility(true, false);
@@ -209,10 +209,10 @@ void ABuilding::ChangeResource(TSubclassOf<AResource> NewResource)
 {
 	if (UUtils::Test(3, NewResource, (__FUNCTION__), __LINE__) == false) return;
 
-	if (Resource != NewResource)
+	if (ResourceClass != NewResource)
 	{
-		Resource = NewResource;
+		ResourceClass = NewResource;
 		UpdateGhostMaterial();
-		BuildWidget->Update(Resource, *ResourceVersions.Find(Resource));
+		BuildWidget->Update(ResourceClass, *ResourceVersions.Find(ResourceClass));
 	}
 }

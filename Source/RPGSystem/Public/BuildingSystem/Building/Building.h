@@ -54,7 +54,7 @@ public:
 
 	// Setter Functions
 	UFUNCTION(BlueprintCallable)
-	void SetResource(TSubclassOf<AResource> NewResource) { Resource = NewResource; }
+	void SetResource(TSubclassOf<AResource> NewResource) { ResourceClass = NewResource; }
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void SetMesh(TSubclassOf<AResource> Resource);
@@ -71,7 +71,7 @@ public:
 
 	void OnLeavePlayerSight();
 
-	void OnBuild(TSubclassOf<AResource> Resource);
+	void OnBuild(TSubclassOf<AResource> InResource);
 
 	UFUNCTION(BlueprintCallable)
 	void Building();
@@ -93,7 +93,7 @@ protected:
 	FBuildingData BuildingData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building", meta = (ExposeOnSpawn = "true", AllowPrivateAccess = "true"))
-	TSubclassOf<AResource> Resource;
+	TSubclassOf<AResource> ResourceClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Building", meta = (ExposeOnSpawn = "true", AllowPrivateAccess = "true"))
 	TMap< TSubclassOf<AResource>, FBuildingResourceVersion> ResourceVersions;

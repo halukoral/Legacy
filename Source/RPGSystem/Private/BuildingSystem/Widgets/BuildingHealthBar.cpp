@@ -2,15 +2,11 @@
 
 #include "BuildingHealthBar.h"
 
-#define INVTEXT(x) FText::FromString(TEXT(x))
-
-
-
 void UBuildingHealthBar::UpdateHealth(const int32& NewHealth)
 {
 	CurrentHealth = FMath::Clamp(NewHealth, 0, MaxHealth);
 	HealthBar->SetPercent((float)CurrentHealth / MaxHealth);
-	HealthText->SetText(FText::Format(INVTEXT("{0} | {1}"), FText::AsNumber(CurrentHealth), FText::AsNumber(MaxHealth)));
+	HealthText->SetText(FText::Format(FText::FromString(TEXT("{0} | {1}")), FText::AsNumber(CurrentHealth), FText::AsNumber(MaxHealth)));
 }
 
 void UBuildingHealthBar::SetState(EBuildingState NewState)

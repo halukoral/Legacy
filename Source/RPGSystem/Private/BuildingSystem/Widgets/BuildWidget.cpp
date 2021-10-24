@@ -2,11 +2,9 @@
 
 #include "BuildWidget.h"
 
-#define INVTEXT(x) FText::FromString(TEXT(x))
-
 void UBuildWidget::Update(TSubclassOf<AResource> Resource, FBuildingResourceVersion VersionInfo)
 {
-	HealthText->SetText(FText::Format(INVTEXT("{0} HP"), VersionInfo.GetMaxHealth()));
+	HealthText->SetText(FText::Format(FText::FromString(TEXT("{0} HP")), VersionInfo.GetMaxHealth()));
 	ResourceAmountText->SetText(FText::AsNumber(VersionInfo.GetRequiredAmount()));
 	ResourceIcon->SetBrushFromTexture(Resource->GetDefaultObject<AResource>()->GetResourceData().GetIcon(), true);
 

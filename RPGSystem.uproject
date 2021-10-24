@@ -1,9 +1,9 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.0",
+	"EngineAssociation": "4.26",
 	"Category": "",
 	"Description": "",
-	"Enterprise": true,
+	"Enterprise": false,
 	"Modules": [
 		{
 			"Name": "RPGSystem",
@@ -13,17 +13,6 @@
 				"Engine",
 				"UMG",
 				"CoreUObject"
-			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "Bridge",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
 			]
 		}
 	]
